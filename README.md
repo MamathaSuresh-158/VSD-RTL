@@ -12,8 +12,8 @@ It describes:
 - Clock and reset behavior.
 
 RTL designs are generally written using Hardware Description Languages (HDLs) such as Verilog and SystemVerilog.
+#### Practical Implementation
 
-![RTL Design](images/rtl_design.png)
 
 ---
 
@@ -40,7 +40,7 @@ The RTL design is converted into corresponding hardware elements such as:
 - Flip-flops.
 - Other combinational and sequential cells.
 
-![RTL to Gate-Level Translation](images/rtl_to_gate_level.png)
+![RTL to Gate-Level Translation](images/rtl.png)
 
 ---
 
