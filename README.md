@@ -170,7 +170,7 @@ The SKY130 RTL Design and Synthesis Workshop repository was explored to understa
 
 ### Repository Setup
 
-![Repository Setup](screenshots/setup1.png)
+![Repository Setup](Day-01/images/setup1.png)
 
 The project contains important directories such as:
 
@@ -180,11 +180,11 @@ The project contains important directories such as:
 
 ### Library Contents
 
-![Library Contents](screenshots/List_of_contents_lib.png)
+![Library Contents](Day-01/images/List_of_contents_lib.png)
 
 ### Verilog Files
 
-![Verilog Files](screenshots/List_of_contents_verilog_files.png)
+![Verilog Files](Day-01/images/List_of_contents_verilog_files.png)
 
 ---
 
@@ -231,7 +231,7 @@ A testbench was used to apply different input combinations and verify the functi
 
 ### RTL and Testbench Code
 
-![MUX RTL and Testbench Code](screenshots/gvim_code_tb_and_v.png)
+![MUX RTL and Testbench Code](Day-01/images/gvim_code_tb_and_v.png)
 
 
 ---
@@ -252,7 +252,7 @@ The simulation waveform was used to verify the functionality of the 2:1 Multiple
 
 ### Simulation Waveform
 
-![MUX Simulation Waveform](screenshots/GKTWave.png)
+![MUX Simulation Waveform](Day-01/images/GKTWave.png)
 
 The waveform verifies that:
 
@@ -305,7 +305,7 @@ The design was synthesized by specifying the top module:
 
 ### Yosys Synthesis
 
-![Yosys Synthesis](screenshots/yoysys.png)
+![Yosys Synthesis](Day-01/images/yoysys.png)
 
 During synthesis, Yosys analyzes the RTL design and converts it into an optimized logic representation.
 
@@ -317,11 +317,11 @@ After synthesis, Yosys reports the statistics and cells used in the design.
 
 ### RTL Synthesis Statistics
 
-![RTL Synthesis Result](screenshots/rtl_result.png)
+![RTL Synthesis Result](Day-01/images/rtl_result.png)
 
 ### RTL Representation
 
-![RTL Representation](screenshots/rtl.png)
+![RTL Representation](Day-01/images/rtl.png)
 
 The RTL representation shows the logical structure of the 2:1 Multiplexer.
 
@@ -349,7 +349,7 @@ The technology mapping results show that the design was successfully mapped usin
 
 ### ABC Results
 
-![ABC Technology Mapping Results](screenshots/ABC_Results.png)
+![ABC Technology Mapping Results](Day-01/images/ABC_Results.png)
 
 The result confirms that the original RTL design was successfully mapped to a technology-specific implementation.
 
@@ -369,7 +369,7 @@ The graphical representation shows:
 
 ### Synthesized MUX Diagram
 
-![Graphical Representation](screenshots/Graphical generation.png)
+![Graphical Representation](Day-01/images/Graphical_generation.png)
 
 This diagram provides a visual representation of the connections in the synthesized design.
 
@@ -383,7 +383,7 @@ The netlist contains technology-specific standard cells and their interconnectio
 
 ### Generated Netlist
 
-![Synthesized Netlist](screenshots/RTL_netlist.png)
+![Synthesized Netlist](Day-01/images/RTL_netlist.png)
 
 The gate-level netlist represents the final synthesized implementation of the 2:1 Multiplexer.
 
