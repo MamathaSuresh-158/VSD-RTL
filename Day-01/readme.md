@@ -252,7 +252,7 @@ The simulation waveform was used to verify the functionality of the 2:1 Multiple
 
 ### Simulation Waveform
 
-![MUX Simulation Waveform](Day-01/images/GKTWave.png)
+![MUX Simulation Waveform](images/GKTWave.png)
 
 The waveform verifies that:
 
