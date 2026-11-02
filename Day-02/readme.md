@@ -251,72 +251,13 @@ In flat synthesis:
 
 
 
-## 7. Arithmetic Operations Using Verilog
-
-Arithmetic operations were also explored using simple Verilog modules.
-
-### 7.1 Multiplication by 2
-
-**File: `mult_2.v`**
-
-```verilog
-module mul2 (input [2:0] a, output [3:0] y);
-
-    assign y = a * 2;
-
-endmodule
-```
-
-This module multiplies a 3-bit input by 2 and produces a 4-bit output.
-![Multiplication by 2](images/Cell_profile_mul2.png)
-![Multiplication by 2](images/mul2_graphical_representation.png)
-### 7.2 Multiplication by 9
-
-**File: `mult_8.v`**
-
-```verilog
-module mult8 (input [2:0] a, output [5:0] y);
-
-    assign y = a * 9;
-
-endmodule
-```
-
-This module multiplies a 3-bit input by 9 and produces a 6-bit output.
-
-### Synthesis
-
-The modules were read and synthesized using Yosys.
-
-```yosys
-read_verilog mult_2.v
-synth -top mul2
-stat
-check
-```
-
-For the second module:
-
-```yosys
-read_verilog mult_8.v
-synth -top mult8
-stat
-check
-```
-
-The synthesis statistics were examined to understand how Yosys processes arithmetic expressions and optimizes the resulting logic.
-
-![Multiplication by 9](images/mult8_cell-profile.png)
-
-![Multiplication by 9](images/mult8_graphical.png)
-
----
 
 
 
 
 
-## 8. D Flip-Flop Experiments
+
+## 7. D Flip-Flop Experiments
 
 ### D Flip-Flop with Asynchronous Reset
 
@@ -481,7 +422,66 @@ endmodule
 ![Synthesized Graphical Representation](images/synchrounous_reset_graphical.png)
 
 ---
+## 8. Arithmetic Operations Using Verilog
 
+Arithmetic operations were also explored using simple Verilog modules.
+
+### 8.1 Multiplication by 2
+
+**File: `mult_2.v`**
+
+```verilog
+module mul2 (input [2:0] a, output [3:0] y);
+
+    assign y = a * 2;
+
+endmodule
+```
+
+This module multiplies a 3-bit input by 2 and produces a 4-bit output.
+![Multiplication by 2](images/Cell_profile_mul2.png)
+![Multiplication by 2](images/mul2_graphical_representation.png)
+### 8.2 Multiplication by 9
+
+**File: `mult_8.v`**
+
+```verilog
+module mult8 (input [2:0] a, output [5:0] y);
+
+    assign y = a * 9;
+
+endmodule
+```
+
+This module multiplies a 3-bit input by 9 and produces a 6-bit output.
+
+### Synthesis
+
+The modules were read and synthesized using Yosys.
+
+```yosys
+read_verilog mult_2.v
+synth -top mul2
+stat
+check
+```
+
+For the second module:
+
+```yosys
+read_verilog mult_8.v
+synth -top mult8
+stat
+check
+```
+
+The synthesis statistics were examined to understand how Yosys processes arithmetic expressions and optimizes the resulting logic.
+
+![Multiplication by 9](images/mult8_cell-profile.png)
+
+![Multiplication by 9](images/mult8_graphical.png)
+
+---
 ## 9. Key Observations
 
 1. A multi-module Verilog design can be implemented using module instantiation.
