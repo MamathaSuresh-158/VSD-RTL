@@ -6,19 +6,62 @@ The objective of Day 2 was to understand multi-module RTL design, hierarchical s
 
 The following concepts were covered:
 
+
+- Liberty file exploration.
 - Multi-module Verilog design.
 - Module instantiation and port connections.
 - Hierarchical synthesis using Yosys.
 - Flat synthesis and netlist generation.
 - Understanding synthesized netlists.
-- Liberty file exploration.
 - Sequential circuit design using D Flip-Flops.
 - Synchronous reset implementation.
 - Functional verification using GTKWave.
 
 ---
+### 2.Introduction
 
-## 2. Multi-Module RTL Design
+A standard cell library contains pre-designed and characterized logic cells used during digital IC design.
+
+The SKY130 standard cell library provides cells such as:
+
+- Inverters
+- NAND and NOR gates
+- AND and OR gates
+- Multiplexers
+- Flip-flops
+- Buffers
+
+### Liberty File (`.lib`)
+
+The Liberty file contains information about the standard cells, including:
+
+- Cell names and functionality
+- Input and output pin information
+- Timing characteristics
+- Power information
+- Area information
+- Operating conditions
+
+### PVT Conditions
+
+PVT stands for:
+
+- **Process:** Manufacturing variations.
+- **Voltage:** Operating supply voltage.
+- **Temperature:** Operating temperature.
+
+These conditions affect the performance and timing of standard cells.
+
+
+### Observation
+
+The SKY130 library contains different standard cells with different area, power and timing characteristics. The Liberty file provides the information required by synthesis and timing analysis tools.
+
+![SKY130 Technology Mapping](images/.lib_and0_contents.png)
+
+![SKY130 Technology Mapping](images/.lib_and2_contents.png)
+---
+## 3. Multi-Module RTL Design
 
 Multi-module design allows a large digital circuit to be divided into smaller, reusable modules.
 
@@ -68,17 +111,16 @@ The design hierarchy contains three modules:
 2. `sub_module1` – AND operation.
 3. `sub_module2` – OR operation.
 
-### Screenshot – RTL Design
+![Hierarchy code](images/Hierarchy_code1.png)
+![Hierarchy code](images/Hierarchy_code2.png)
 
-![Multiple Modules Verilog Code](images/multiple_modules_code.png)
 
-### Screenshot – Hierarchical Design
 
-![Hierarchical Design](images/multiple_modules_hier.png)
+
 
 ---
 
-## 3. Yosys Synthesis
+## 4. Yosys Synthesis
 
 Yosys is an open-source synthesis tool used to convert RTL Verilog code into a gate-level netlist.
 
@@ -110,19 +152,12 @@ synth -top multiple_modules
 
 This command performs synthesis while maintaining the module hierarchy.
 
-### Step 5: Check the Design
-
-```yosys
-check
-```
-
-The design was checked for structural problems.
 
 **Observed Result:**
 
 `Found and reported 0 problems.`
 
-### Step 6: Display the Synthesized Design
+### Step 5: Display the Synthesized Design
 
 ```yosys
 show
@@ -130,13 +165,13 @@ show
 
 The synthesized design can be viewed graphically.
 
-### Screenshot – Yosys Synthesis
 
-![Yosys Hierarchical Synthesis](images/hierarchical_synthesis.png)
+![Yosys Sub-module Synthesis](images/submodule1_graphical_rep.png)
+![Yosys Hierarchical Synthesis](images/Multiple_modules_graphical_generation.png)
 
 ---
 
-## 4. Understanding Hierarchical Synthesis
+## 5. Understanding Hierarchical Synthesis
 
 In hierarchical synthesis, the individual modules are synthesized while maintaining their structural relationships.
 
@@ -160,12 +195,16 @@ The synthesized submodules contain:
 
 This demonstrates how Yosys preserves the hierarchy of a multi-module design.
 
+![Multiple Modules Verilog Code](images/Details_of_modules_and_submodules.png)
+![Hierarchical Design](images/Design_hierarchy.png)
 ---
 
-## 5. Flat Synthesis
+## 6. Flat Synthesis
 
 Flat synthesis converts the hierarchical design into a single module by removing the submodule boundaries.
 
+![Flat Code](images/flatten_code1.v.png)
+![Flat Code](images/flatten_code2.v.png)
 ### Step 1: Read the Verilog File
 
 ```yosys
@@ -180,19 +219,15 @@ synth -top multiple_modules -flatten
 
 The `-flatten` option removes the module hierarchy and combines the logic into the top-level module.
 
-### Step 3: Check the Design
 
-```yosys
-check
-```
 
-### Step 4: Generate the Flattened Netlist
+### Step 3: Generate the Flattened Netlist
 
 ```yosys
 write_verilog -noattr multiple_modules_flat.v
 ```
 
-### Step 5: View the Generated Netlist
+### Step 4: View the Generated Netlist
 
 ```bash
 gvim multiple_modules_flat.v
@@ -207,42 +242,14 @@ In flat synthesis:
 - The complete logic is available in one module.
 - The resulting netlist is easier to examine as a single flattened design.
 
-### Screenshot – Flat Synthesis
 
-![Flat Synthesis](images/multiple_modules_flat.png)
 
-### Screenshot – Flattened Netlist
 
-![Flattened Netlist](images/flattened_netlist.png)
+![Flattened Generation](images/Graphical-generation_flatten_code.png)
 
 ---
 
-## 6. Technology Mapping Using SKY130 Library
 
-Technology mapping converts the synthesized logic into standard cells available in the target technology library.
-
-The SKY130 standard cell library provides different logic gates and sequential cells.
-
-The Liberty file used was:
-
-`sky130_fd_sc_hd__tt_025C_1v80.lib`
-
-The synthesis process maps the logic into available SKY130 standard cells.
-
-Some of the cells observed in the generated netlist include:
-
-- `sky130_fd_sc_hd__and2_0`
-- `sky130_fd_sc_hd__clkinv_1`
-- `sky130_fd_sc_hd__nand2_1`
-- `sky130_fd_sc_hd__dfrtp_1`
-
-The generated netlist contains instances of standard cells with their respective input and output connections.
-
-### Screenshot – Technology-Mapped Netlist
-
-![SKY130 Technology Mapping](images/technology_mapped_netlist.png)
-
----
 
 ## 7. Arithmetic Operations Using Verilog
 
@@ -261,7 +268,8 @@ endmodule
 ```
 
 This module multiplies a 3-bit input by 2 and produces a 4-bit output.
-
+![Multiplication by 2](images/Cell_profile_mul2.png)
+![Multiplication by 2](images/mul2_graphical_representation.png)
 ### 7.2 Multiplication by 9
 
 **File: `mult_8.v`**
@@ -298,170 +306,183 @@ check
 
 The synthesis statistics were examined to understand how Yosys processes arithmetic expressions and optimizes the resulting logic.
 
-### Screenshot – Multiplication by 2
+![Multiplication by 9](images/mult8_cell-profile.png)
 
-![Multiplication by 2](images/mul2_synthesis.png)
-
-### Screenshot – Multiplication by 9
-
-![Multiplication by 9](images/mult8_synthesis.png)
+![Multiplication by 9](images/mult8_graphical.png)
 
 ---
 
-## 8. D Flip-Flop with Synchronous Reset
 
-A D Flip-Flop is a sequential circuit that stores one bit of data.
 
-The output changes according to the input at the active clock edge.
 
-A synchronous reset resets the output only when the reset signal is active at the triggering clock edge.
 
-### Verilog Code
+## 8. D Flip-Flop Experiments
 
-**File: `dff_syncres.v`**
+### D Flip-Flop with Asynchronous Reset
+
+### Testbench Code (`tb_dff_asyncres.v`)
 
 ```verilog
-module dff_syncres (
-    input clk,
-    input async_reset,
-    input sync_reset,
-    input d,
-    output reg q
-);
+`timescale 1ns / 1ps
+module tb_dff_asyncres;
+    // Inputs
+    reg clk, async_reset, d;
+    // Outputs
+    wire q;
 
-always @(posedge clk)
+    // Instantiate the Unit Under Test (UUT)
+    dff_asyncres uut (
+        .clk(clk),
+        .async_reset(async_reset),
+        .d(d),
+        .q(q)
+    );
+
+    initial begin
+        $dumpfile("tb_dff_asyncres.vcd");
+        $dumpvars(0,tb_dff_asyncres);
+        // Initialize Inputs
+        clk = 0;
+        async_reset = 1;
+        d = 0;
+        #3000 $finish;
+    end
+
+    always #10 clk = ~clk;
+    always #23 d = ~d;
+    always #547 async_reset=~async_reset;
+endmodule
+```
+
+### Simulation Result
+
+![GTK Wave](images/asynchronours_reset_waveform.png)
+### Synthesized Graphical Representation
+
+![Synthesized Graphical Representation](images/asynchronous-reset_graphical.png)
+---
+
+### D Flip-Flop with Asynchronous Set
+
+### Verilog Code (`dff_async_set.v`)
+
+```verilog
+module dff_async_set ( input clk , input async_set , input d , output reg q );
+always @ (posedge clk , posedge async_set)
+begin
+    if(async_set)
+        q <= 1'b1;
+    else
+        q <= d;
+end
+endmodule
+```
+
+### Testbench Code (`tb_dff_async_set.v`)
+
+```verilog
+`timescale 1ns / 1ps
+module tb_dff_async_set;
+        // Inputs
+        reg clk, async_set, d;
+        // Outputs
+        wire q;
+
+        // Instantiate the Unit Under Test (UUT)
+        dff_async_set uut (
+                .clk(clk),
+                .async_set(async_set),
+                .d(d),
+                .q(q)
+        );
+
+        initial begin
+        $dumpfile("tb_dff_async_set.vcd");
+        $dumpvars(0,tb_dff_async_set);
+        // Initialize Inputs
+        clk = 0;
+        async_set = 1;
+        d = 0;
+        #3000 $finish;
+        end
+
+always #10 clk = ~clk;
+always #23 d = ~d;
+always #547 async_set=~async_set;
+endmodule
+```
+
+### Simulation Waveform
+![GTK Wave](images/asynchronous-set_waveform.png)
+
+
+### Synthesized Graphical Representation
+
+![Synthesized Graphical Representation](images/asynchronous-set_graphical.png)
+
+---
+
+### D Flip-Flop with Synchronous Reset
+
+### Verilog Code (`dff_syncres.v`)
+
+```verilog
+module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+always @ (posedge clk)
 begin
     if (sync_reset)
         q <= 1'b0;
     else
         q <= d;
 end
-
 endmodule
 ```
 
-### Explanation
-
-- `clk` – Clock input.
-- `sync_reset` – Synchronous reset signal.
-- `d` – Data input.
-- `q` – Registered output.
-- `posedge clk` – The circuit responds to the rising edge of the clock.
-- When `sync_reset` is HIGH, the output becomes 0.
-- Otherwise, the output follows the data input at the rising clock edge.
-
-**Note:** Although `async_reset` is declared in the module, it is not used in the above implementation. The circuit implements synchronous reset.
-
----
-
-## 9. Testbench for D Flip-Flop
-
-A testbench was created to verify the functionality of the D Flip-Flop.
-
-**File: `tb_dff_syncres.v`**
+### Testbench Code (`tb_dff_syncres.v`)
 
 ```verilog
 `timescale 1ns / 1ps
-
 module tb_dff_syncres;
+        // Inputs
+        reg clk, sync_reset, d;
+        // Outputs
+        wire q;
 
-    // Inputs
-    reg clk;
-    reg sync_reset;
-    reg d;
+        // Instantiate the Unit Under Test (UUT)
+        dff_syncres uut (
+                .clk(clk),
+                .sync_reset(sync_reset),
+                .d(d),
+                .q(q)
+        );
 
-    // Output
-    wire q;
-
-    // Instantiate the Unit Under Test
-    dff_syncres uut (
-        .clk(clk),
-        .sync_reset(sync_reset),
-        .d(d),
-        .q(q)
-    );
-
-    initial begin
-
+        initial begin
         $dumpfile("tb_dff_syncres.vcd");
-        $dumpvars(0, tb_dff_syncres);
-
-        // Initialize inputs
+        $dumpvars(0,tb_dff_syncres);
+        // Initialize Inputs
         clk = 0;
         sync_reset = 0;
         d = 0;
-
         #3000 $finish;
+        end
 
-    end
-
-    always #10 clk = ~clk;
-
-    always #23 d = ~d;
-
-    always #113 sync_reset = ~sync_reset;
-
+always #10 clk = ~clk;
+always #23 d = ~d;
+always #113 sync_reset = ~sync_reset;
 endmodule
 ```
 
-### Testbench Explanation
+### Simulation Waveform
+![GTK Wave](images/synchronous_reset_waveform.png)
 
-- The clock is generated using `always #10 clk = ~clk`.
-- The data input changes every 23 ns.
-- The synchronous reset changes every 113 ns.
-- `$dumpfile` specifies the VCD output file.
-- `$dumpvars` records the simulation signals.
-- `$finish` terminates the simulation.
 
----
+### Synthesized Graphical Representation
 
-## 10. Functional Simulation Using Icarus Verilog
-
-The Verilog design and testbench were simulated using Icarus Verilog.
-
-### Step 1: Compile the Verilog Files
-
-```bash
-iverilog -o dff_sim dff_syncres.v tb_dff_syncres.v
-```
-
-### Step 2: Run the Simulation
-
-```bash
-vvp dff_sim
-```
-
-### Step 3: Open GTKWave
-
-```bash
-gtkwave tb_dff_syncres.vcd
-```
-
-### Step 4: Add Signals
-
-The following signals were added to the GTKWave waveform viewer:
-
-- `clk`
-- `d`
-- `q`
-- `sync_reset`
-
-### Simulation Result
-
-The waveform demonstrates the operation of a D Flip-Flop with synchronous reset.
-
-- The clock signal continuously toggles.
-- The data input changes periodically.
-- The output follows the data input at the rising edge of the clock when reset is LOW.
-- When synchronous reset is HIGH at the rising clock edge, the output becomes LOW.
-
-### Screenshot – GTKWave Simulation
-
-![D Flip-Flop GTKWave Simulation](images/dff_syncres_waveform.png)
+![Synthesized Graphical Representation](images/synchrounous_reset_graphical.png)
 
 ---
 
-## 11. Key Observations
+## 9. Key Observations
 
 1. A multi-module Verilog design can be implemented using module instantiation.
 2. Hierarchical synthesis preserves the structural organization of the design.
@@ -476,7 +497,7 @@ The waveform demonstrates the operation of a D Flip-Flop with synchronous reset.
 
 ---
 
-## 12. Conclusion
+## 10. Conclusion
 
 Day 2 provided practical exposure to multi-module RTL design, hierarchical and flat synthesis, and technology mapping using the SKY130 standard cell library.
 
@@ -488,7 +509,7 @@ Overall, the exercises helped strengthen the understanding of RTL design, synthe
 
 ---
 
-## 13. Tools and Technologies Used
+## 11. Tools and Technologies Used
 
 | Tool / Technology | Purpose |
 |---|---|
@@ -503,7 +524,7 @@ Overall, the exercises helped strengthen the understanding of RTL design, synthe
 
 ---
 
-## 14. Repository Structure
+## 12. Repository Structure
 
 ```text
 Day_02/
