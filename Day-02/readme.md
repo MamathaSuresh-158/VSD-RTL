@@ -1,12 +1,5 @@
 # Day 2 – RTL Design, Hierarchical Synthesis and Sequential Logic
 
-**Program:** VSD Women in VLSI Training Program  
-**Date:** 02 November 2026  
-**Technology:** SKY130  
-**Tools Used:** Yosys, GTKWave, Neovim, SKY130 Standard Cell Library
-
----
-
 ## 1. Objective
 
 The objective of Day 2 was to understand multi-module RTL design, hierarchical synthesis, flattening of design hierarchy, technology mapping using the SKY130 standard cell library, and the implementation and simulation of sequential circuits.
@@ -536,8 +529,3 @@ Day_02/
 └── README.md
 ```
 
----
-
-**Program:** VSD Women in VLSI Training Program  
-**Day:** 02  
-**Focus:** RTL Design, Hierarchical Synthesis, SKY130 Technology Mapping and Sequential Logic
