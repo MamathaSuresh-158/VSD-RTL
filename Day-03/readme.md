@@ -1,8 +1,4 @@
-# Day 3 – VSD Women in VLSI Training Program
-
-## Combinational and Sequential Logic Optimization
-
-**Date:** 03 November 2026
+# Day 3 – Combinational and Sequential Logic Optimization
 
 ---
 
