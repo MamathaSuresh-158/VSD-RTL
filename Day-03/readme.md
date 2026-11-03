@@ -13,7 +13,7 @@ The techniques discussed include:
 - **Constant Propagation:** Replacing constant values in logic expressions to simplify the circuit.
 - **Boolean Expression Optimization:** Simplifying Boolean expressions using techniques such as K-map and Quine-McCluskey.
 
-### Experiment 1: opt_check
+### Experiment 1: Opt_check
 
 #### Verilog Code (`opt_check.v`)
 
@@ -53,6 +53,8 @@ module tb_opt_check;
     always #55 b = ~b;
 endmodule
 ```
+
+![opt_check](images/opt_check_graphical_rep.png)
 
 ### Experiment 2: opt_check2
 
@@ -94,6 +96,7 @@ module tb_opt_check2;
     always #55 b = ~b;
 endmodule
 ```
+![opt_check](images/opt_check2_graphical_rep.png)
 
 ### Experiment 3: opt_check3
 
@@ -138,6 +141,7 @@ module tb_opt_check3;
     always #75 c = ~c;
 endmodule
 ```
+![opt_check](images/opt_check3_graphical_rep.png)
 
 ### Experiment 4: opt_check4
 
@@ -148,7 +152,7 @@ module opt_check4 (input a , input b , input c , output y);
     assign y = a?(b?(a & c):c):(!c);
 endmodule
 ```
-
+![opt_check](images/opt_check4_graphical_rep.png)
 ---
 
 ## 2. Multiple Module Optimization
@@ -175,7 +179,7 @@ module multiple_module_opt(input a , input b , input c , input d , output y);
 
 endmodule
 ```
-
+![Multiple Module Optimization](images/multiple_modules_opt_graphical_rep.png)
 ---
 
 ## 3. Sequential Logic Optimization
@@ -195,7 +199,7 @@ The techniques discussed include:
 
 In sequential constant propagation, if a signal is assigned a constant value, the constant can be propagated through the sequential logic.
 
-The notes also discuss optimization of unused states, retiming and sequential logic cloning.
+The video sessions also discuss optimization of unused states, retiming and sequential logic cloning.
 
 ---
 
@@ -220,6 +224,7 @@ end
 
 endmodule
 ```
+![Counter Optimization](images/counter_opt_graphical_rep.png)
 
 ### Experiment 2: counter_opt2
 
@@ -240,7 +245,7 @@ end
 
 endmodule
 ```
-
+![Counter Optimization](images/counter_opt2_graphical_rep.png)
 ---
 
 ## 5. D Flip-Flop Constant Optimization
@@ -258,7 +263,8 @@ begin
 end
 endmodule
 ```
-
+![D Flip-Flop Constant 1](images/dff_const1_gtk_wave.png)
+![D Flip-Flop Constant 1](images/dff_const1_graphical_rep.png)
 ### Experiment 2: dff_const2
 
 ```verilog
@@ -272,7 +278,8 @@ begin
 end
 endmodule
 ```
-
+![D Flip-Flop Constant 2](images/dff_const2_gtk_wave.png)
+![D Flip-Flop Constant 2](images/dff_const2_graphical_rep.png)
 ### Experiment 3: dff_const3
 
 ```verilog
@@ -294,7 +301,8 @@ begin
 end
 endmodule
 ```
-
+![D Flip-Flop Constant 3](images/dff_const3_gtk_wave.png)
+![D Flip-Flop Constant 3](images/dff_const3_graphical_rep.png)
 ### Experiment 4: dff_const4
 
 ```verilog
@@ -316,7 +324,8 @@ begin
 end
 endmodule
 ```
-
+![D Flip-Flop Constant 4](images/dff_const4_gtk_wave.png)
+![D Flip-Flop Constant 4](images/dff_const4_graphical_rep.png)
 ### Experiment 5: dff_const5
 
 ```verilog
@@ -338,7 +347,8 @@ begin
 end
 endmodule
 ```
-
+![D Flip-Flop Constant 5](images/dff_const5_gtk_wave.png)
+![D Flip-Flop Constant 5](images/dff_const5_graphical_rep.png)
 ---
 
 ## 6. Key Learnings
