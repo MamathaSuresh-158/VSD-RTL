@@ -1,8 +1,5 @@
 # Day 4 – Gate Level Simulation (GLS), Blocking and Non-Blocking Assignments
 
-## Overview
-
-Day 4 of the VSD Women in VLSI Training Program focused on Gate Level Simulation (GLS), synthesis-simulation mismatch, Verilog coding styles, and the differences between blocking and non-blocking assignments.
 
 ## 1. Gate Level Simulation (GLS)
 
@@ -20,8 +17,6 @@ Gate Level Simulation is performed by running the testbench with the synthesized
 2. The gate-level netlist and testbench are given to Icarus Verilog.
 3. Simulation generates a VCD file.
 4. The VCD file is viewed using GTKWave.
-
-![GLS Flow](images/gtkwave_gls_bad_mux.png)
 
 ## 2. Gate-Level Verilog Models
 
@@ -99,9 +94,7 @@ endmodule
 - When `sel = 0`, output `y = i0`.
 - When `sel = 1`, output `y = i1`.
 
-### RTL Code
 
-![Ternary Operator MUX](images/ternary_mux.png)
 
 ### Simulation Waveform
 
@@ -111,9 +104,7 @@ endmodule
 
 ![Ternary MUX Synthesis](images/synthesis_ternary_mux.png)
 
-### Gate-Level Simulation
 
-![Ternary MUX GLS](images/gtkwave_gls_ternary_mux.png)
 
 ## 6. Bad MUX Coding Style
 
@@ -189,9 +180,7 @@ endmodule
 - The output responds to changes in the inputs.
 - This avoids the incomplete sensitivity-list problem.
 
-### RTL Code
 
-![Good MUX RTL](images/ternary_mux.png)
 
 ## 8. Caveats with Blocking Assignments
 
@@ -224,9 +213,6 @@ endmodule
 - Therefore, `d` uses the previous value of `x` in that execution.
 - This can result in unexpected behaviour and synthesis-simulation mismatch.
 
-### RTL Code
-
-![Blocking Caveat RTL](images/blocking_caveat.png)
 
 ### Simulation Waveform
 
