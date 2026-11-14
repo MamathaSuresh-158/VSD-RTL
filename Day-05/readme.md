@@ -94,11 +94,13 @@ The following waveforms demonstrate the behaviour of the incomplete and conditio
 
 ![Incomplete if simulation](images/gtkwave_if.png)
 
+![Incomplete if synthesis](images/synthesis_if.png)
+
 ![Incomplete if with additional conditions](images/gtkwave_if2.png)
 
-![Incomplete if testbench simulation](images/gtkwave_incomp_case.png)
+![Incomplete if with additional conditions](images/synthesis_if2.png)
 
-![Incomplete if second testbench simulation](images/gtkwave_incomp_if2.vcd.png)
+
 
 ## 2. Case Statements
 
@@ -141,7 +143,11 @@ end
 
 endmodule
 ```
+### Simulation Results
 
+The following waveforms demonstrate the behaviour of the  Complete Case Statement.
+![Complete case waveform](images/gtkwave_comp_case.png)
+![Complete case synthesis](images/synthesis_comp_case.png)
 ### Incomplete Case Statement
 
 ```verilog
@@ -166,6 +172,12 @@ endmodule
 The selector values `2'b10` and `2'b11` are not explicitly handled. Since the output is not assigned for those conditions, an inferred latch can be created.
 
 To avoid this, use a `default` assignment.
+
+### Simulation Results
+
+The following waveforms demonstrate the behaviour of the  incomplete Case Statement.
+![InComplete case waveform](images/gtkwave_incomp_case.png)
+![InComplete case synthesis](images/synthesis_incomp_case.png)
 
 ### Partial Assignment in Case
 
@@ -200,6 +212,13 @@ endmodule
 
 In the `2'b01` condition, only `y` is assigned and `x` is not assigned. This can cause an inferred latch on `x`.
 
+### Simulation Results
+
+The following waveforms demonstrate the behaviour of the Partial Assignment in Case
+
+![ Partial Assignment in Case synthesis](images/synthesis_partial_case_assign.png)
+
+
 ### Bad Case Example
 
 The following example illustrates the importance of avoiding overlapping case conditions.
@@ -228,11 +247,17 @@ endmodule
 
 Overlapping or ambiguous case conditions should be avoided because they can cause unintended selection behaviour.
 
+
 ### Simulation Results
 
-![Complete case waveform](images/gtkwave_comp_case.png)
+The following waveforms demonstrate the behaviour of the Bad Case
 
 ![Bad case waveform](images/gtkwave_bad_case.png)
+
+![Bad case waveform](images/gls_bad_case.png)
+
+![Bad case waveform](images/synthesis_bad_case.png)
+
 
 ## 3. Looping Constructs in Verilog
 
@@ -369,25 +394,8 @@ The loop iterates through all eight output positions and activates the output se
 
 ![Demultiplexer generate waveform](images/gtkwave_demux_generate.png)
 
-## 7. Incomplete and Complete Case Simulation
 
-Different case implementations were simulated to understand the effect of incomplete assignments and the importance of default conditions.
-
-The testbenches applied input combinations and generated VCD files for waveform analysis.
-
-### Testbench and Simulation Screenshots
-
-![Incomplete case testbench](images/tb_incomplete_case.v(1).png)
-
-![Incomplete case second testbench](images/tb_incomplete_case2.v(1).png)
-
-![Incomplete if testbench](images/tb_incomplete_if.v(1).png)
-
-![Incomplete if second testbench](images/tb_incomplete_if2.v(1).png)
-
-![Incomplete if additional testbench](images/tb_incomplete_if2.2.v(1).png)
-
-## 8. Ripple Carry Adder
+## 7. Ripple Carry Adder
 
 A ripple-carry adder is constructed by connecting multiple full adders in series.
 
@@ -457,7 +465,7 @@ For two 8-bit inputs, the output is therefore 9 bits wide.
 
 ![Ripple carry adder waveform](images/gtkwave_rca.png)
 
-## 9. Important Concepts Learned
+## 8. Important Concepts Learned
 
 - `if-else` statements are used to create priority logic.
 - Incomplete `if` statements can infer latches.
